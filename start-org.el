@@ -1,5 +1,5 @@
 (require 'org-install)
-(require 'org-mu4e)
+;; (require 'org-mu4e)
 
 (load "~/.emacs.d/org-export.el")
 (load "~/.emacs.d/org-gtd.el")

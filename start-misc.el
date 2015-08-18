@@ -1,4 +1,7 @@
+(setq load-path (cons "~/.emacs.d/lib/" load-path))
+
 (require 'zenburn-theme)
+(require 'sr-speedbar)
 
 (require 'midnight)
 (require 'saveplace)
@@ -28,6 +31,12 @@
 ;; variables ;;
 ;;;;;;;;;;;;;;;
 (setq
+
+ ediff-split-window-function (quote split-window-horizontally)
+
+ ;; dont use tabs 
+ indent-tabs-mode nil 
+
  ;;;;;;;;;;;;;
  ;; general ;;
  ;;;;;;;;;;;;;
@@ -35,10 +44,10 @@
  save-place-file "~/.emacs.d/data/saveplace"  
  require-final-newline t
  default-frame-alist '((font-backend . "xft")
-		       (font . "Monospace-10");; "Inconsolata-14"
+		       (font . "Monospace-12");; "Inconsolata-14"
 		       (right-fringe . 0)
 		       (left-fringe . 1)
-		       (scroll-bar-mode . -1)
+ 		       (scroll-bar-mode . -1)
 		       (menu-bar-lines . 0)
 		       (tool-bar-lines . -1))
 
@@ -50,8 +59,6 @@
  inhibit-startup-message t
  ;; file-cache-completion-ignore-case t
  ;; bbdb-file "~/.emacs.d/data/bbdb-file"
- user-full-name "Andre J. Aberer"
- user-mail-address "andre@aberer.io" 
 
  backup-directory-alist '(("." . "~/.emacs.d/data/backups/")) 
  confirm-kill-emacs 'y-or-n-p
@@ -135,7 +142,7 @@
   )             ;; ... on the right
 
 
-(setq load-path (cons "~/.emacs.d/lib/" load-path))
+
 
 ;; (require 'flyspell-timer)
 ;; (add-hook 'flyspell-mode-hook 'flyspell-timer-ensure-idle-timer)
@@ -147,7 +154,7 @@
 ;; (ac-config-default)
 
 
- (setq emerge-diff-options "--ignore-all-space")
+(setq emerge-diff-options "--ignore-all-space")
 
 
 (setq ediff-diff-options "-w")
@@ -160,3 +167,27 @@
 (put 'upcase-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
 (put 'downcase-region 'disabled nil)
+
+(setq magit-auto-revert-mode nil)
+(setq magit-last-seen-setup-instructions "1.4.0")
+
+(setq url-proxy-services
+      '( 
+	;; ("no_proxy" . "work\\.com")
+         ("http" . "172.16.3.1:8080") 
+         ("https" . "172.16.3.1:8080" )
+         )
+      )
+
+(when window-system          ; start speedbar if we're using a window system
+  (sr-speedbar-open))
+
+;; (defun valgrind ()
+;; (interactive)
+;; (compilation-minor-mode)
+;; (define-key compilation-minor-mode-map (kbd "") 'comint-send-input)
+;; (define-key compilation-minor-mode-map (kbd "S-") 'compile-goto-error))
+
+;; (add-hook 'shell-mode-hook 'valgrind)
+
+

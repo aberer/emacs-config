@@ -4,10 +4,12 @@
 (require 'semantic/ia)
 (require 'yasnippet )
 
-(add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
+;; (require 'setup-helm)
 
+(require 'function-args)
+(fa-config-default)
 
-
+;; (add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
 
 (setq-default indent-tabs-mode nil)
 
@@ -45,9 +47,9 @@
 
 (setq 
  semantic-default-submodes '(
-														 global-semantic-highlight-func-mode
-														 global-semantic-decoration-mode
-														 global-semantic-stickyfunc-mode 
+                             global-semantic-highlight-func-mode
+                             global-semantic-decoration-mode
+                             global-semantic-stickyfunc-mode 
 			     global-semantic-idle-completions-mode 
 			     global-semantic-idle-scheduler-mode 
 			     global-semanticdb-minor-mode
@@ -63,52 +65,58 @@
 (semantic-mode 1 )
 
 
-;; REACTIVATE 
 
-;; (ede-cpp-root-project "tree" 
-;;                 :file "~/proj/astl/tree/configure.ac" 
-;; 		:include-path '( 
-;; 				"/src"
-;;                                 )
-;; 		)
+(load "~/.emacs.d/code-projects.el")
 
-;; (ede-cpp-root-project "exabayes" 
-;;                 :file "~/proj/exa-bayes/configure.ac" 
-;; 		:include-path '( 
-;; 				"/src"
-;; 				"/src/comm"
-;; 				"/src/comm/dummy"
-;; 				"/src/comm/mpi"
-;; 				"/src/comm/threads"
-;; 				"/src/contrib"
-;; 				"/src/file"
-;; 				"/src/eval"
-;; 				"/src/data-struct"
-;; 				"/src/parser"
-;; 				"/src/config"
-;; 				"/src/tree-init"
-;; 				"/src/model"
-;; 				"/src/system"
-;; 				"/src/tree-parse"
-;; 				"/src/branches"
-;; 				"/src/parameters"
-;; 				"/src/math"
-;; 				"/src/proposals"
-;; 				"/src/proposals/param-proposers"
-;; 				"/src/proposals/topo-proposers"
-;; 				"/src/priors"
-;; 				"/src/apps"
-;; 				"/src/mcmc"
-;; 				)
-;; 		)
 
 (c-toggle-hungry-state -1 )
 (setq speedbar-update-flag t)
 
 (yas-global-mode 1 )
+
 (defun my:ac-c-header-init()
   (require 'auto-complete-c-headers)
   (add-to-list 'ac-sources 'ac-source-c-headers))
 
 (add-hook 'c++mode-hook 'my:ac-c-header-init)
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
+
+;; dont indent after namespace 
+(defconst my-cc-style
+  '("user" ;; c++-mode
+    (c-offsets-alist . (
+                        (innamespace . 0)
+                        (substatement-open . 0)
+                        ) ) )
+  )
+(c-add-style "linux" my-cc-style)
+
+(setq
+ c-default-style "linux"
+ c-basic-offset 4
+ )
+
+;; whitespace mode 
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+
+(add-hook 'c++-mode-hook 'whitespace-mode)
+(add-hook 'c-mode-hook 'whitespace-mode)
+
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.uml\\'" . plantuml-mode))
+
+;; (setq compilation-window-height 10)
+;; (defun my-compilation-hook ()
+;;   (when (not (get-buffer-window "*compilation*"))
+;;     (save-selected-window
+;;       (save-excursion
+;;         (let* ((w (split-window-vertically))
+;;                (h (window-height w)))
+;;           (select-window w)
+;;           (switch-to-buffer "*compilation*")
+;;           (shrink-window (- h compilation-window-height)))))))
+;; (add-hook 'compilation-mode-hook 'my-compilation-hook)
+
+(setq gdb-create-source-file-list nil) 
