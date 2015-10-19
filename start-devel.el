@@ -2,7 +2,9 @@
 (require 'semantic)
 (require 'semantic/sb)
 (require 'semantic/ia)
+
 (require 'srecode)
+(require 'semantic/bovine/gcc)
 
 (global-ede-mode 1)                      ; Enable the Project management system
 
@@ -15,33 +17,35 @@
 
 (semantic-mode 1)
 
-(setq
- semantic-idle-scheduler-idle-time 1
- global-semantic-decoration-mode t
- global-semantic-highlight-edits-mode t
- global-semantic-highlight-func-mode t
- global-semantic-idle-summary-mode t
- global-semantic-show-unmatched-syntax-mode t
- global-semantic-idle-completions-mode t 
-)
+(global-semantic-idle-completions-mode t)
+(global-semantic-highlight-func-mode t)
+(global-semantic-decoration-mode t)
+(global-semantic-show-unmatched-syntax-mode t)
 
-(setq 
- semantic-default-submodes '(
-                             global-semantic-highlight-func-mode
-                             global-semantic-decoration-mode
-                             global-semantic-stickyfunc-mode 
-			     global-semantic-idle-completions-mode 
-			     global-semantic-idle-scheduler-mode 
-			     global-semanticdb-minor-mode
-			     global-semantic-idle-summary-mode
-			     global-semantic-mru-bookmark-mode
-			     global-semantic-idle-local-symbol-highlight-mode
-			     global-semantic-highlight-edits-mode
-			     global-semantic-show-unmatched-syntax-mode
-			     global-semantic-show-parser-state-mode
-			     ))
+(setq semantic-default-submodes
+      '(
+        global-semanticdb-minor-mode
+        global-semantic-mru-bookmark-mode
+        global-semantic-highlight-func-mode
+        global-semantic-stickyfunc-mode 
+        global-semantic-decoration-mode
+        global-semantic-idle-local-symbol-highlight-mode
+        global-semantic-idle-scheduler-mode 
+        global-semantic-idle-completions-mode
+        global-semantic-idle-summary-mode
+        global-semantic-idle-breadcrumbs
+        ))
 
 (global-set-key (kbd "M-ä") 'semantic-ia-fast-jump)
+
+;; begin: experimental
+;; (when (cedet-gnu-global-version-check t)
+;;   (semanticdb-enable-gnu-global-databases 'c-mode)
+  ;; (semanticdb-enable-gnu-global-databases 'c++-mode))
+;; end: experimental
+
+
+
 
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;;;
@@ -81,8 +85,8 @@
         (setq remain-white-stop (/ remain-white 2))
         )
     (progn 
-        (setq remain-white-start  (+ (/ remain-white 2) 1))
-        (setq remain-white-stop (/ remain-white 2))))
+      (setq remain-white-start  (+ (/ remain-white 2) 1))
+      (setq remain-white-stop (/ remain-white 2))))
 
   (move-beginning-of-line nil)
   (princ "//" (current-buffer))
@@ -106,14 +110,14 @@
 
   ;; reset cursor 
   (previous-line nil)
-)
+  )
 
 
 (global-set-key (kbd "C-c _") 'insert-comment-line)
 (global-set-key (kbd "C-c -") 'insert-white-until-half)
 (global-set-key (kbd "C-c +") 'insert-new-comment-box)
 
-(global-set-key (kbd "C-c M-s") 'comment-box)
+(global-set-key (kbd "C-c M-n") 'comment-box)
 (global-set-key (kbd "M-n")  'comment-dwim-2)
 
 ;; _____________________________________________________________________________
@@ -174,7 +178,7 @@
 ;; _____________________________________________________________________________
 
  ;;;;;;;;;;;;;;;;;;;;;;
- ;; WHITESPACE MODE  ;;
+;; WHITESPACE MODE  ;;
  ;;;;;;;;;;;;;;;;;;;;;;
 (require 'whitespace)
 (setq whitespace-line-column 80) ;; limit line length
@@ -233,7 +237,7 @@
 (global-set-key (kbd "C-<f4>") 'valgrind )
 
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.uml\\'" . plantuml-mode))
+(add-to-list 'auto-mode-alist '("\\.puml\\'" . puml-mode))
 
 (setq gdb-create-source-file-list nil) 
 
@@ -244,9 +248,13 @@
 
 (defun my:ac-c-header-init()
   (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers))
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (add-to-list 'ac-sources 'ac-source-semantic)
+  (add-to-list 'ac-sources 'ac-source-gtags)
+  )
 
-(add-hook 'c++mode-hook 'my:ac-c-header-init)
+(add-hook 'c++-mode-hook 'my:ac-c-header-init)
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
 
-;; (c-toggle-hungry-state nil)
+(setq puml-plantuml-jar-path "~/lib/plantuml.jar")
+

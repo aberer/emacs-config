@@ -1,9 +1,5 @@
 (require 'zenburn-theme)
 
-(show-paren-mode 1)
-(blink-cursor-mode -1)
-(scroll-bar-mode -1)
-
 (setq  default-frame-alist '((font-backend . "xft")
                              (font . "Monospace-12");; "Inconsolata-14"
                              (right-fringe . 0)
@@ -14,6 +10,20 @@
        use-file-dialog nil
        )
 
+(show-paren-mode t)
+(blink-cursor-mode -1)
+(scroll-bar-mode -1)
+
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(load-library "iso-transl")
+
+(setq column-number-mode t)
+
+(setq  frame-title-format "Emacs: %b ")	; Frame Title
+(setq inhibit-startup-message t)
+
+
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; HIGHLIGHT CURRENT LINE ;;
@@ -22,4 +32,3 @@
 (require 'highlight-current-line)
 (setq highlight-current-line-globally t)
 (highlight-current-line-on t)
-

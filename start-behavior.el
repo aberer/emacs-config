@@ -21,6 +21,24 @@
  scroll-preserve-screen-position 1
  )
 
+
+;; _____________________________________________________________________________
+;;;;;;;;;;;;;;
+;; UNIQUIFY ;;
+;;;;;;;;;;;;;;
+
+(require 'uniquify)
+(setq
+ uniquify-buffer-name-style 'post-forward
+ uniquify-separator ":")
+
+;; _____________________________________________________________________________
+;;;;;;;;;;;;;
+;; browser ;;
+;;;;;;;;;;;;;
+(setq browse-url-browser-function 'browse-url-generic)
+(setq browse-url-generic-program "/usr/bin/chromium")
+
 ;; _____________________________________________________________________________
 
 (global-set-key (kbd "C-c C-r") (lambda () (interactive) (load-file "~/.emacs.d/init.el")))
@@ -37,3 +55,4 @@
 ;; faster moving between buffers
 (windmove-default-keybindings 'meta)
 
+(setq require-final-newline t)

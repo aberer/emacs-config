@@ -1,6 +1,3 @@
-;; (require 'cl) ; a rare necessary use of REQUIRE
-;; (defvar *emacs-load-start* (current-time))
-
 (setq custom-file "~/.emacs.d/custom")
 (load custom-file)
 
@@ -12,6 +9,7 @@
 (load "~/.emacs.d/start-org")
 (load "~/.emacs.d/valgrind")
 (load "~/.emacs.d/user-data")
+(load "~/.emacs.d/start-utils.el")
 
 (put 'narrow-to-region 'disabled nil)
 
