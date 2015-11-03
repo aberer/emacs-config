@@ -53,7 +53,7 @@
 ;;;;;;;;;;;;;;;;
 
 (defun insert-comment-line ()
-  (interactive )
+  (interactive)
   (c-indent-line-or-region) 
   (comment-dwim-2)
   (princ (apply 'concat (make-list (- 80 (current-column))  "_")) (current-buffer))
@@ -79,18 +79,14 @@
   (setq remain-white
         (max 0 (- 80 4 end-col)))
 
-  (if (= (mod remain-white 2) 0 )
-      (progn 
-        (setq remain-white-start (/ remain-white 2))
-        (setq remain-white-stop (/ remain-white 2))
-        )
-    (progn 
-      (setq remain-white-start  (+ (/ remain-white 2) 1))
-      (setq remain-white-stop (/ remain-white 2))))
+  (progn 
+    (setq remain-white-start  (+ (/ remain-white 2)
+                                 (if(= (mod remain-white 2) 0 ) 0  1 )   ))
+    (setq remain-white-stop (/ remain-white 2)))
 
   (move-beginning-of-line nil)
+  (c-indent-line-or-region)
   (princ "//" (current-buffer))
-  (comment-dwim-2)
   (print-many-whites remain-white-start )
   (move-end-of-line nil)
   (print-many-whites remain-white-stop )
@@ -111,6 +107,7 @@
   ;; reset cursor 
   (previous-line nil)
   )
+
 
 
 (global-set-key (kbd "C-c _") 'insert-comment-line)
@@ -172,7 +169,7 @@
 ;; FIND OTHER FILE  ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
-(setq ff-always-in-other-window t)
+;; (setq ff-always-in-other-window nil)
 (global-set-key (kbd "C-x M-o") 'ff-find-other-file)
 
 ;; _____________________________________________________________________________
