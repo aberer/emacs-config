@@ -34,7 +34,11 @@
         global-semantic-idle-breadcrumbs
         ))
 
+
 (global-set-key (kbd "M-ä") 'semantic-ia-fast-jump)
+(global-set-key (kbd "M-p") 'dabbrev-expand)
+
+
 
 ;; begin: experimental
 ;; (when (cedet-gnu-global-version-check t)
@@ -123,8 +127,15 @@
 (setq compilation-read-command nil
       compilation-auto-jump-to-first-error t)
 
-;; (global-set-key (kbd "C-<f2>") (lambda () (interactive) (compile "~/lib/compile-local.sh ae"))) ; uses clang 
+;TODO: move to user defined things 
 (global-set-key (kbd "C-<f1>")  (lambda () (interactive) (compile "cd /tmp/exabayes/ ; make -j4 ")))
+(global-set-key (kbd "C-<f2>") (lambda () (interactive) (compile "~/lib/compile-local.sh ae"))) ; uses clang 
+(global-set-key (kbd "C-<f1>")
+                (lambda ()
+                  (interactive)
+                  (progn
+                    (update-tango-project)
+                    (compile "~/lib/compile-local.sh"))))
 
 ;; _____________________________________________________________________________
 
@@ -252,5 +263,16 @@
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
 
 (setq puml-plantuml-jar-path "~/lib/plantuml.jar")
+
+
+;; _____________________________________________________________________________
+
+;;;;;;;;;
+;; XML ;;
+;;;;;;;;;
+
+(setq nxml-child-indent 4)
+(setq nxml-outline-child-indent 4)
+
 
 
