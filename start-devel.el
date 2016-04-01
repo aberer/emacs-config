@@ -147,19 +147,19 @@
 (setq-default indent-tabs-mode nil)
 
 ;; dont indent after namespace 
-;; (defconst my-cc-style
-;;   '("user" ;; c++-mode
-;;     (c-offsets-alist . (
-;;                         ;; (innamespace . 0) ;
-;;                         ;; (substatement-open . 2)
-;;                         ) ) )
-;;   )
-;; (c-add-style "linux" my-cc-style)
+(defconst my-cc-style
+  '("user" ;; c++-mode
+    (c-offsets-alist . (
+                        (innamespace . [0])
+                        (substatement-open . 0)
+                        ) ) )
+  )
+(c-add-style "linux" my-cc-style)
 
-;; (setq
-;;  c-default-style "linux"
-;;  ;; c-basic-offset 2
-;;  )
+(setq
+ c-default-style "linux"
+ c-basic-offset 4
+ )
 
 ;; _____________________________________________________________________________
 
@@ -252,15 +252,15 @@
 ;; (c-toggle-hungry-state -1 )
 (setq speedbar-update-flag t)
 
-(defun my:ac-c-header-init()
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
-  (add-to-list 'ac-sources 'ac-source-semantic)
-  (add-to-list 'ac-sources 'ac-source-gtags)
-  )
+;; (defun my:ac-c-header-init()
+;;   (require 'auto-complete-c-headers)
+;;   (add-to-list 'ac-sources 'ac-source-c-headers)
+;;   (add-to-list 'ac-sources 'ac-source-semantic)
+;;   (add-to-list 'ac-sources 'ac-source-gtags)
+;;   )
 
-(add-hook 'c++-mode-hook 'my:ac-c-header-init)
-(add-hook 'c-mode-hook 'my:ac-c-header-init)
+;; (add-hook 'c++-mode-hook 'my:ac-c-header-init)
+;; (add-hook 'c-mode-hook 'my:ac-c-header-init)
 
 (setq puml-plantuml-jar-path "~/lib/plantuml.jar")
 
@@ -274,5 +274,19 @@
 (setq nxml-child-indent 4)
 (setq nxml-outline-child-indent 4)
 
+;; _____________________________________________________________________________
 
+;;;;;;;;;;;
+;; rtags ;;
+;;;;;;;;;;;
 
+;TODO: BEGIN cleanup 
+;; (load-file "/workspace/users/a.aberer/proj/rtags/src/rtags.el")
+(require 'rtags)
+(rtags-enable-standard-keybindings c-mode-base-map "\C-xr")
+
+(require 'company)
+(global-company-mode)
+(push 'company-rtags company-backends)
+(define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
+;TODO: END cleanup
