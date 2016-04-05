@@ -8,14 +8,12 @@
 
 (global-ede-mode 1)                      ; Enable the Project management system
 
-;; (require 'setup-helm)
-
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;;
 ;; SEMANTIC  ;;
 ;;;;;;;;;;;;;;;
 
-(semantic-mode 1)
+(semantic-mode 0)
 
 (global-semantic-idle-completions-mode t)
 (global-semantic-highlight-func-mode t)
@@ -125,8 +123,8 @@
 (setq compilation-read-command nil
       compilation-auto-jump-to-first-error t)
 
-(global-set-key (kbd "C-<f2>") (lambda () (interactive) (compile "~/lib/compile-local.sh ae"))) ; uses clang 
-(global-set-key (kbd "C-<f1>") (lambda () (interactive) (compile "~/lib/compile-local.sh")))
+;; (global-set-key (kbd "C-<f2>") (lambda () (interactive) (compile "~/lib/compile-local.sh ae"))) ; uses clang 
+(global-set-key (kbd "C-<f1>")  (lambda () (interactive) (compile "cd /tmp/exabayes/ ; make -j4 ")))
 
 ;; _____________________________________________________________________________
 
@@ -138,19 +136,19 @@
 (setq-default indent-tabs-mode nil)
 
 ;; dont indent after namespace 
-(defconst my-cc-style
-  '("user" ;; c++-mode
-    (c-offsets-alist . (
-                        (innamespace . 0)
-                        (substatement-open . 0)
-                        ) ) )
-  )
-(c-add-style "linux" my-cc-style)
+;; (defconst my-cc-style
+;;   '("user" ;; c++-mode
+;;     (c-offsets-alist . (
+;;                         ;; (innamespace . 0) ;
+;;                         ;; (substatement-open . 2)
+;;                         ) ) )
+;;   )
+;; (c-add-style "linux" my-cc-style)
 
-(setq
- c-default-style "linux"
- c-basic-offset 4
- )
+;; (setq
+;;  c-default-style "linux"
+;;  ;; c-basic-offset 2
+;;  )
 
 ;; _____________________________________________________________________________
 
@@ -181,8 +179,8 @@
 (setq whitespace-line-column 80) ;; limit line length
 (setq whitespace-style '(face lines-tail))
 
-(add-hook 'c++-mode-hook 'whitespace-mode)
-(add-hook 'c-mode-hook 'whitespace-mode)
+(add-hook 'c++-mode-hook (lambda ()  (interactive) (whitespace-mode 1)))
+(add-hook 'c-mode-hook (lambda () (interactive) (whitespace-mode 1)))
 
 ;; also whitespace for python
 (add-hook 'python-mode-hook 'whitespace-mode)
@@ -254,4 +252,5 @@
 (add-hook 'c-mode-hook 'my:ac-c-header-init)
 
 (setq puml-plantuml-jar-path "~/lib/plantuml.jar")
+
 
