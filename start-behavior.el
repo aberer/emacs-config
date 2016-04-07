@@ -56,3 +56,8 @@
 (windmove-default-keybindings 'meta)
 
 (setq require-final-newline t)
+
+;; helm 
+(require 'helm)
+(helm-mode 1)
+(global-set-key (kbd "M-x") 'helm-M-x)

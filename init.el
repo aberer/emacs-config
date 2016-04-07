@@ -2,7 +2,7 @@
 (load custom-file)
 
 (load "~/.emacs.d/start-packages")
-(load "~/.emacs.d/user-functions.el")
+(load "~/.emacs.d/user-functions")
 (load "~/.emacs.d/start-misc")
 (load "~/.emacs.d/start-appearance")
 (load "~/.emacs.d/start-behavior")
