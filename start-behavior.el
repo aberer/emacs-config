@@ -17,7 +17,7 @@
 ;; SCROLLING ;;
 ;;;;;;;;;;;;;;;
 
-(setq 
+(setq
  scroll-margin 1
  auto-window-vscroll nil
  scroll-step 1
@@ -50,8 +50,8 @@
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-x C-k") 'kill-region)
 (global-set-key (kbd "C-x C-b") 'bs-show)
-(global-set-key (kbd "C-c q") 'auto-fill-mode)   
-(global-set-key (kbd "C-c C") 'calc)  
+(global-set-key (kbd "C-c q") 'auto-fill-mode)
+(global-set-key (kbd "C-c C") 'calc)
 (global-set-key (kbd "C-c C-i") 'timeclock-in)
 (global-set-key (kbd "C-c C-o") 'timeclock-out)
 (global-set-key (kbd "C-c f") 'comint-dynamic-complete-filename)

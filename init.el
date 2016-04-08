@@ -2,15 +2,19 @@
 (load custom-file)
 
 (load "~/.emacs.d/start-packages")
-(load "~/.emacs.d/user-functions.el")
+(load "~/.emacs.d/user-functions")
 (load "~/.emacs.d/start-misc")
 (load "~/.emacs.d/start-appearance")
 (load "~/.emacs.d/start-behavior")
 (load "~/.emacs.d/start-devel")
 (load "~/.emacs.d/start-org")
-(load "~/.emacs.d/valgrind")
+;; (load "~/.emacs.d/valgrind")
+(load "~/.emacs.d/org-gtd")
 (load "~/.emacs.d/user-data")
-(load "~/.emacs.d/start-utils.el")
+(load "~/.emacs.d/start-utils")
+(load "~/.emacs.d/start-mu4e")
+(load "~/.emacs.d/mode-line")
+(load "~/.emacs.d/start-experimental")
 
 (put 'narrow-to-region 'disabled nil)
 

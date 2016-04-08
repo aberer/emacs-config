@@ -18,7 +18,6 @@
 
 ;; BEGIN keys 
 
-
 (setq org-agenda-files (quote ("~/gtd")))
 
 

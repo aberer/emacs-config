@@ -8,8 +8,6 @@
 
 (global-ede-mode 1)                      ; Enable the Project management system
 
-;; (require 'setup-helm)
-
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;;
 ;; SEMANTIC  ;;
@@ -27,10 +25,10 @@
         global-semanticdb-minor-mode
         global-semantic-mru-bookmark-mode
         global-semantic-highlight-func-mode
-        global-semantic-stickyfunc-mode 
+        global-semantic-stickyfunc-mode
         global-semantic-decoration-mode
         global-semantic-idle-local-symbol-highlight-mode
-        global-semantic-idle-scheduler-mode 
+        global-semantic-idle-scheduler-mode
         global-semantic-idle-completions-mode
         global-semantic-idle-summary-mode
         global-semantic-idle-breadcrumbs
@@ -58,7 +56,7 @@
 
 (defun insert-comment-line ()
   (interactive)
-  (c-indent-line-or-region) 
+  (c-indent-line-or-region)
   (comment-dwim-2)
   (princ (apply 'concat (make-list (- 80 (current-column))  "_")) (current-buffer))
   )
@@ -69,8 +67,8 @@
   (princ (apply 'concat (make-list (max (- 40 (current-column)) 0)  " ")) (current-buffer))
   )
 
-(defun print-many-whites (n) 
-  (princ (apply 'concat (make-list n " " ))  
+(defun print-many-whites (n)
+  (princ (apply 'concat (make-list n " " ))
          (current-buffer)))
 
 (defun insert-new-comment-box()
@@ -83,7 +81,7 @@
   (setq remain-white
         (max 0 (- 80 4 end-col)))
 
-  (progn 
+  (progn
     (setq remain-white-start  (+ (/ remain-white 2)
                                  (if(= (mod remain-white 2) 0 ) 0  1 )   ))
     (setq remain-white-stop (/ remain-white 2)))
@@ -96,19 +94,19 @@
   (print-many-whites remain-white-stop )
   (princ "//" (current-buffer))
 
-  ;; frame around commented line 
+  ;; frame around commented line
 
   (move-beginning-of-line nil)
   (open-line 1)
   (c-indent-line-or-region)
   (princ (apply 'concat (make-list (- 80 (current-column))  "/")) (current-buffer))
 
-  (next-line nil) 
+  (next-line nil)
   (newline 1)
   (c-indent-line-or-region)
   (princ (apply 'concat (make-list (- 80 (current-column))  "/")) (current-buffer))
 
-  ;; reset cursor 
+  ;; reset cursor
   (previous-line nil)
   )
 
@@ -129,7 +127,9 @@
 (setq compilation-read-command nil
       compilation-auto-jump-to-first-error t)
 
-(global-set-key (kbd "C-<f2>") (lambda () (interactive) (compile "~/lib/compile-local.sh ae"))) ; uses clang 
+;TODO: move to user defined things
+(global-set-key (kbd "C-<f1>")  (lambda () (interactive) (compile "cd /tmp/exabayes/ ; make -j4 ")))
+(global-set-key (kbd "C-<f2>") (lambda () (interactive) (compile "~/lib/compile-local.sh ae"))) ; uses clang
 (global-set-key (kbd "C-<f1>")
                 (lambda ()
                   (interactive)
@@ -146,7 +146,7 @@
 
 (setq-default indent-tabs-mode nil)
 
-;; dont indent after namespace 
+;; dont indent after namespace
 (defconst my-cc-style
   '("user" ;; c++-mode
     (c-offsets-alist . (
@@ -188,8 +188,8 @@
 (setq whitespace-line-column 80) ;; limit line length
 (setq whitespace-style '(face lines-tail))
 
-(add-hook 'c++-mode-hook 'whitespace-mode)
-(add-hook 'c-mode-hook 'whitespace-mode)
+(add-hook 'c++-mode-hook (lambda ()  (interactive) (whitespace-mode 1)))
+(add-hook 'c-mode-hook (lambda () (interactive) (whitespace-mode 1)))
 
 ;; also whitespace for python
 (add-hook 'python-mode-hook 'whitespace-mode)
@@ -200,11 +200,11 @@
 ;; GDB  ;;
 ;;;;;;;;;;
 
-(add-hook 'gud-mode-hook 
-	  '(lambda () 
-	     ()
-	     (define-key gud-mode-map  (kbd "M-g M-p") 'gud-down)
-	     (define-key gud-mode-map  (kbd "M-g M-n") 'gud-up) ))
+(add-hook 'gud-mode-hook
+          '(lambda ()
+             ()
+             (define-key gud-mode-map  (kbd "M-g M-p") 'gud-down)
+             (define-key gud-mode-map  (kbd "M-g M-n") 'gud-up) ))
 
 (setq  gdb-many-windows t
        gdb-max-children 200
@@ -243,7 +243,7 @@
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.puml\\'" . puml-mode))
 
-(setq gdb-create-source-file-list nil) 
+(setq gdb-create-source-file-list nil)
 
 (global-set-key [C-M-tab] 'clang-format-region)
 
@@ -278,7 +278,7 @@
 ;; rtags ;;
 ;;;;;;;;;;;
 
-;TODO: BEGIN cleanup 
+;TODO: BEGIN cleanup
 ;; (load-file "/workspace/users/a.aberer/proj/rtags/src/rtags.el")
 (require 'rtags)
 
