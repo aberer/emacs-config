@@ -56,9 +56,18 @@
 (windmove-default-keybindings 'meta)
 
 (setq require-final-newline t)
+
+
+
 ;;;;;;;;;;;;;;;;;;;
 ;; golden ratio  ;;
 ;;;;;;;;;;;;;;;;;;;
 (require 'golden-ratio)
 (golden-ratio-mode 1)
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; whitespace butler  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'ws-butler)
+(ws-butler-global-mode t)
