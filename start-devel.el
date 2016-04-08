@@ -281,7 +281,37 @@
 ;TODO: BEGIN cleanup 
 ;; (load-file "/workspace/users/a.aberer/proj/rtags/src/rtags.el")
 (require 'rtags)
-(rtags-enable-standard-keybindings c-mode-base-map "\C-xr")
+
+(rtags-enable-standard-keybindings)
+
+(setq rtags-autostart-diagnostics t)
+(rtags-diagnostics)
+(setq rtags-completions-enabled t)
+
+(add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+(add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
+
+
+(define-key c-mode-base-map (kbd "M-.") (function rtags-find-symbol-at-point))
+(define-key c-mode-base-map (kbd "M-,") (function rtags-find-references-at-point))
+;; (rtags-print-dependencies)
+;; (define-key c-mode-base-map (kbd "M-;") (function tags-find-file))
+;; (define-key c-mode-base-map (kbd "C-.") (function tags-find-symbol))
+;; (define-key c-mode-base-map (kbd "C-,") (function tags-find-references))
+;; (define-key c-mode-base-map (kbd "C-<") (function rtags-find-virtuals-at-point))
+;; (define-key c-mode-base-map (kbd "M-i") (function tags-imenu))
+
+;; (define-key global-map (kbd "M-.") (function tags-find-symbol-at-point))
+;; (define-key global-map (kbd "M-,") (function tags-find-references-at-point))
+;; (define-key global-map (kbd "M-;") (function tags-find-file))
+;; (define-key global-map (kbd "C-.") (function tags-find-symbol))
+;; (define-key global-map (kbd "C-,") (function tags-find-references))
+;; (define-key global-map (kbd "C-<") (function rtags-find-virtuals-at-point))
+;; (define-key global-map (kbd "M-i") (function tags-imenu))
+
+
+
+
 ;; _____________________________________________________________________________
 
 ;;;;;;;;;;;;;
