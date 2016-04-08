@@ -168,9 +168,7 @@
 ;;;;;;;;;;;;;;;;
 
 (require 'yasnippet)
-(yas-global-mode)
-(setq yas-snippet-dirs (append yas-snippet-dirs '("~/.emacs.d/snippets/")))
-(yas-reload-all)
+(yas-global-mode 1)
 
 ;; _____________________________________________________________________________
 

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cref
+# key: cref
+# --
+const $1& 
