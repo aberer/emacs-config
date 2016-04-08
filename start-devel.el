@@ -282,9 +282,14 @@
 ;; (load-file "/workspace/users/a.aberer/proj/rtags/src/rtags.el")
 (require 'rtags)
 (rtags-enable-standard-keybindings c-mode-base-map "\C-xr")
+;; _____________________________________________________________________________
+
+;;;;;;;;;;;;;
+;; company ;;
+;;;;;;;;;;;;;
 
 (require 'company)
-(global-company-mode)
+(global-company-mode 1)
 (push 'company-rtags company-backends)
+
 (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
-;TODO: END cleanup
