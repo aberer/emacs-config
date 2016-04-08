@@ -321,5 +321,6 @@
 (require 'company)
 (global-company-mode 1)
 (push 'company-rtags company-backends)
+(setq company-auto-complete t)
 
 (define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
