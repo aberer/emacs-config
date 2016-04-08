@@ -1,6 +1,5 @@
 (setq delete-selection-mode nil)
-(sestq fill-column 80)
-
+(setq fill-column 80)
 
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;
@@ -55,6 +54,8 @@
 (global-set-key (kbd "C-c C-i") 'timeclock-in)
 (global-set-key (kbd "C-c C-o") 'timeclock-out)
 (global-set-key (kbd "C-c f") 'comint-dynamic-complete-filename)
+
+(global-set-key (kbd "C-j") 'newline-and-indent)
 
 ;; faster moving between buffers
 (windmove-default-keybindings 'meta)
