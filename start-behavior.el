@@ -48,7 +48,6 @@
 (global-set-key (kbd "<f8>") 'toggle-truncate-lines)
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-x C-k") 'kill-region)
-(global-set-key (kbd "C-x C-b") 'bs-show)
 (global-set-key (kbd "C-c q") 'auto-fill-mode)
 (global-set-key (kbd "C-c C") 'calc)
 (global-set-key (kbd "C-c C-i") 'timeclock-in)
@@ -104,3 +103,8 @@
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c h o") 'helm-occur)
+
+(eval-after-load 'company
+  '(progn
+     (define-key company-mode-map (kbd "C-:") 'helm-company)
+     (define-key company-active-map (kbd "C-:") 'helm-company)))
