@@ -38,16 +38,11 @@
 (global-set-key (kbd "M-ä") 'semantic-ia-fast-jump)
 (global-set-key (kbd "M-p") 'dabbrev-expand)
 
-
-
 ;; begin: experimental
 ;; (when (cedet-gnu-global-version-check t)
 ;;   (semanticdb-enable-gnu-global-databases 'c-mode)
   ;; (semanticdb-enable-gnu-global-databases 'c++-mode))
 ;; end: experimental
-
-
-
 
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;;;
@@ -128,8 +123,16 @@
       compilation-auto-jump-to-first-error t)
 
 ;TODO: move to user defined things
-(global-set-key (kbd "C-<f1>")  (lambda () (interactive) (compile "cd /tmp/exabayes/ ; make -j4 ")))
-(global-set-key (kbd "C-<f2>") (lambda () (interactive) (compile "~/lib/compile-local.sh ae"))) ; uses clang
+(global-set-key (kbd "C-<f1>")
+                (lambda ()
+                  (interactive)
+                  (compile "cd /tmp/exabayes/ ; make -j4 ")))
+
+(global-set-key (kbd "C-<f2>")
+                (lambda ()
+                  (interactive)
+                  (compile "~/lib/compile-local.sh ae"))) ; uses clang
+
 (global-set-key (kbd "C-<f1>")
                 (lambda ()
                   (interactive)
