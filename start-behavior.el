@@ -108,3 +108,19 @@
   '(progn
      (define-key company-mode-map (kbd "C-:") 'helm-company)
      (define-key company-active-map (kbd "C-:") 'helm-company)))
+
+
+;; _____________________________________________________________________________
+
+;;;;;;;;;;;;;;;;;;
+;; smart parens ;;
+;;;;;;;;;;;;;;;;;;
+
+(use-package smartparens-config
+             :ensure smartparens
+             :config
+             (progn
+               (show-smartparens-global-mode t)))
+
+(add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
+(add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
