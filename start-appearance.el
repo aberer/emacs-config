@@ -1,4 +1,4 @@
-(require 'zenburn-theme)
+(use-package zenburn-theme)
 
 (setq  default-frame-alist '((font-backend . "xft")
                              (font . "Monospace-12");; "Inconsolata-14"
@@ -32,3 +32,6 @@
 (require 'highlight-current-line)
 (setq highlight-current-line-globally t)
 (highlight-current-line-on t)
+
+
+(setq enable-recursive-minibuffers t)

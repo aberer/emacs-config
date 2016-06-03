@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: inc1
+# name: inc2
 # key: in"
 # --
 #include "$1"

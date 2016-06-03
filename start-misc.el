@@ -32,8 +32,6 @@
 (auto-image-file-mode)
 (icomplete-mode 99)
 
-(setq initial-buffer-choice "~/gtd/tasks.org")
-
 ;;;;;;;;;;;;;;;
 ;; FLYSPELL  ;;
 ;;;;;;;;;;;;;;;

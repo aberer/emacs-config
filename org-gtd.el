@@ -1,5 +1,7 @@
 ;; (add-to-list 'load-path "~/.emacs.d/")
-(setq org-hide-leading-stars t) 
+(require 'org-mu4e)
+
+(setq org-hide-leading-stars t)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (setq org-log-done t)
@@ -22,9 +24,13 @@
 
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/gtd/tasks.org" "INBOX")
-         "* TODO %?\n %a \n %T")
-        ))
+      '( ("t"
+          "Todo"
+          entry
+          (file+headline "~/gtd/tasks.org" "INBOX")
+          "* TODO %?\n %a \n %T")
+         ("a" "Appointment" entry (file+datetree+prompt "~/gtd/tasks.org" "Calendar") "* APPT  %?\n %a \n SCHEDULED: %T")
+         ))
 
 (global-set-key (kbd "<f5>")  '(lambda ()
                                  (interactive)

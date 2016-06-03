@@ -21,3 +21,5 @@
 (load custom-file)
 (put 'downcase-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
+
+(setq initial-buffer-choice (org-agenda-list))

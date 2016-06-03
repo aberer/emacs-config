@@ -8,6 +8,9 @@
 
 (global-ede-mode 1)                      ; Enable the Project management system
 
+
+(add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
+
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;;
 ;; SEMANTIC  ;;
