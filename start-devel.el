@@ -1,51 +1,5 @@
-(require 'cedet)
-(require 'semantic)
-(require 'semantic/sb)
-(require 'semantic/ia)
-
-(require 'srecode)
-(require 'semantic/bovine/gcc)
-
-(global-ede-mode 1)                      ; Enable the Project management system
-
-
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 
-;; _____________________________________________________________________________
-;;;;;;;;;;;;;;;
-;; SEMANTIC  ;;
-;;;;;;;;;;;;;;;
-
-(semantic-mode 0)
-
-(global-semantic-idle-completions-mode t)
-(global-semantic-highlight-func-mode t)
-(global-semantic-decoration-mode t)
-(global-semantic-show-unmatched-syntax-mode t)
-
-(setq semantic-default-submodes
-      '(
-        global-semanticdb-minor-mode
-        global-semantic-mru-bookmark-mode
-        global-semantic-highlight-func-mode
-        global-semantic-stickyfunc-mode
-        global-semantic-decoration-mode
-        global-semantic-idle-local-symbol-highlight-mode
-        global-semantic-idle-scheduler-mode
-        global-semantic-idle-completions-mode
-        global-semantic-idle-summary-mode
-        global-semantic-idle-breadcrumbs
-        ))
-
-
-(global-set-key (kbd "M-ä") 'semantic-ia-fast-jump)
-(global-set-key (kbd "M-p") 'dabbrev-expand)
-
-;; begin: experimental
-;; (when (cedet-gnu-global-version-check t)
-;;   (semanticdb-enable-gnu-global-databases 'c-mode)
-  ;; (semanticdb-enable-gnu-global-databases 'c++-mode))
-;; end: experimental
 
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;;;
@@ -107,8 +61,6 @@
   ;; reset cursor
   (previous-line nil)
   )
-
-
 
 (global-set-key (kbd "C-c _") 'insert-comment-line)
 (global-set-key (kbd "C-c -") 'insert-white-until-half)
@@ -172,9 +124,8 @@
 ;;;;;;;;;;;;;;;;
 ;; YASNIPPET  ;;
 ;;;;;;;;;;;;;;;;
-
-(require 'yasnippet)
-(yas-global-mode 1)
+(use-package yasnippet
+  :config (yas-global-mode 1))
 
 ;; _____________________________________________________________________________
 
@@ -190,21 +141,25 @@
  ;;;;;;;;;;;;;;;;;;;;;;
 ;; WHITESPACE MODE  ;;
  ;;;;;;;;;;;;;;;;;;;;;;
-(require 'whitespace)
-(setq whitespace-line-column 80) ;; limit line length
-(setq whitespace-style '(face lines-tail))
+(use-package whitespace
+  :ensure
+  :init
+  (setq whitespace-line-column 80) ;; limit line length
+  (setq whitespace-style '(face lines-tail))
+  :config
+  (add-hook 'c++-mode-hook (lambda ()  (interactive) (whitespace-mode 1)))
+  (add-hook 'c-mode-hook (lambda () (interactive) (whitespace-mode 1)))
+  (add-hook 'python-mode-hook 'whitespace-mode))
 
-;; (global-whitespace-mode 1)
 
-(add-hook 'c++-mode-hook (lambda ()  (interactive) (whitespace-mode 1)))
-(add-hook 'c-mode-hook (lambda () (interactive) (whitespace-mode 1)))
-(add-hook 'python-mode-hook 'whitespace-mode)
 
 ;; _____________________________________________________________________________
 
 ;;;;;;;;;;
 ;; GDB  ;;
 ;;;;;;;;;;
+
+
 
 (add-hook 'gud-mode-hook
           '(lambda ()
@@ -226,17 +181,18 @@
 
 (setq
  ediff-split-window-function (quote split-window-horizontally)
- ediff-diff-options "-w"
- )
+ ediff-diff-options "-w" )
 
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;
 ;; MAGIT ;;
 ;;;;;;;;;;;
-
-(setq magit-auto-revert-mode nil)
-(setq magit-last-seen-setup-instructions "1.4.0")
-(global-set-key (kbd "C-<f5>") 'magit-status)
+(use-package magit
+  :init
+  (setq magit-auto-revert-mode nil)
+  (setq magit-last-seen-setup-instructions "1.4.0")
+  :bind
+  ("C-<f5>" . magit-status))
 
 ;; _____________________________________________________________________________
 
@@ -244,30 +200,16 @@
 ;; UNCATEGORIZED ;;
 ;;;;;;;;;;;;;;;;;;;
 
-(global-set-key (kbd "C-<f4>") 'valgrind )
-
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.puml\\'" . puml-mode))
 
 (setq gdb-create-source-file-list nil)
 
-(global-set-key [C-M-tab] 'clang-format-region)
-
-;; (c-toggle-hungry-state -1 )
 (setq speedbar-update-flag t)
 
-;; (defun my:ac-c-header-init()
-;;   (require 'auto-complete-c-headers)
-;;   (add-to-list 'ac-sources 'ac-source-c-headers)
-;;   (add-to-list 'ac-sources 'ac-source-semantic)
-;;   (add-to-list 'ac-sources 'ac-source-gtags)
-;;   )
-
-;; (add-hook 'c++-mode-hook 'my:ac-c-header-init)
-;; (add-hook 'c-mode-hook 'my:ac-c-header-init)
-
-(setq puml-plantuml-jar-path "~/lib/plantuml.jar")
-
+(use-package puml-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.puml\\'" . puml-mode))
+  (setq puml-plantuml-jar-path "~/lib/plantuml.jar") )
 
 ;; _____________________________________________________________________________
 
@@ -284,49 +226,35 @@
 ;; rtags ;;
 ;;;;;;;;;;;
 
-;TODO: BEGIN cleanup
-;; (load-file "/workspace/users/a.aberer/proj/rtags/src/rtags.el")
-(require 'rtags)
+(use-package rtags
 
-(rtags-enable-standard-keybindings)
+  :init
+  (setq rtags-autostart-diagnostics t)
+  (setq rtags-completions-enabled t)
 
-(setq rtags-autostart-diagnostics t)
-(rtags-diagnostics)
-(setq rtags-completions-enabled t)
+  :config
+  (rtags-enable-standard-keybindings)
+  (rtags-diagnostics)
+  (add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
+  (add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
 
-(add-hook 'c-mode-common-hook 'rtags-start-process-unless-running)
-(add-hook 'c++-mode-common-hook 'rtags-start-process-unless-running)
-
-
-(define-key c-mode-base-map (kbd "M-.") (function rtags-find-symbol-at-point))
-(define-key c-mode-base-map (kbd "M-,") (function rtags-find-references-at-point))
-;; (rtags-print-dependencies)
-;; (define-key c-mode-base-map (kbd "M-;") (function tags-find-file))
-;; (define-key c-mode-base-map (kbd "C-.") (function tags-find-symbol))
-;; (define-key c-mode-base-map (kbd "C-,") (function tags-find-references))
-;; (define-key c-mode-base-map (kbd "C-<") (function rtags-find-virtuals-at-point))
-;; (define-key c-mode-base-map (kbd "M-i") (function tags-imenu))
-
-;; (define-key global-map (kbd "M-.") (function tags-find-symbol-at-point))
-;; (define-key global-map (kbd "M-,") (function tags-find-references-at-point))
-;; (define-key global-map (kbd "M-;") (function tags-find-file))
-;; (define-key global-map (kbd "C-.") (function tags-find-symbol))
-;; (define-key global-map (kbd "C-,") (function tags-find-references))
-;; (define-key global-map (kbd "C-<") (function rtags-find-virtuals-at-point))
-;; (define-key global-map (kbd "M-i") (function tags-imenu))
-
-
-
+  :bind
+  (:map
+   c-mode-base-map
+   ("M-." . rtags-find-symbol-at-point)
+   ("M-," . rtags-find-references-at-point)))
 
 ;; _____________________________________________________________________________
 
 ;;;;;;;;;;;;;
 ;; company ;;
 ;;;;;;;;;;;;;
-
-(require 'company)
-(global-company-mode 1)
-(push 'company-rtags company-backends)
-(setq company-auto-complete t)
-
-(define-key c-mode-base-map (kbd "<C-tab>") (function company-complete))
+(use-package company
+  :ensure
+  :config
+  (global-company-mode 1)
+  (push 'company-rtags company-backends)
+  (setq company-auto-complete t)
+  :bind
+  (:map c-mode-base-map
+        ("<C-tab>" .  company-complete)))

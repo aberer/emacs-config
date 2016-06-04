@@ -1,11 +1,34 @@
-(require 'org-install)
-;; (require 'org-mu4e)
+(use-package org-install
+  :init
+  (setq org-tags-column -65)
+  :bind
+  ("C-c l" . org-store-link)
+  ("C-c c" . org-capture)
+  ("C-c a" . org-agenda))
 
-;; (load "~/.emacs.d/org-export.el")
-;; (load "~/.emacs.d/org-gtd.el")
 
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
+(setq org-agenda-start-on-weekday 0)
 
-(setf org-tags-column -65)
+
+(use-package org-mu4e)
+
+(setq org-hide-leading-stars t)
+
+(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+(setq org-log-done t)
+
+(setq org-agenda-files (quote ("~/gtd")))
+
+
+(setq org-capture-templates
+      '( ("t"
+          "Todo"
+          entry
+          (file+headline "~/gtd/tasks.org" "INBOX")
+          "* TODO %?\n %a \n %T")
+         ("a" "Appointment" entry (file+datetree+prompt "~/gtd/tasks.org" "Calendar") "* APPT  %?\n %a \n SCHEDULED: %T")
+         ))
+
+(global-set-key (kbd "<f5>")  '(lambda ()
+                                 (interactive)
+                                 (find-file "~/gtd/tasks.org") ))

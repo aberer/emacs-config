@@ -29,8 +29,9 @@
 ;; HIGHLIGHT CURRENT LINE ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'highlight-current-line)
-(setq highlight-current-line-globally t)
+(use-package highlight-current-line
+  :config (setq highlight-current-line-globally t))
+
 (highlight-current-line-on t)
 
 

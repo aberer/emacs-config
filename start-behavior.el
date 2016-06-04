@@ -6,7 +6,7 @@
 ;; MIDNIGHT ;;
 ;;;;;;;;;;;;;;
 
-(require 'midnight)
+(use-package midnight)
 
 (setq clean-buffer-list-delay-general 1)
 
@@ -24,23 +24,22 @@
  scroll-preserve-screen-position 1
  )
 
-
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;
 ;; UNIQUIFY ;;
 ;;;;;;;;;;;;;;
 
-(require 'uniquify)
-(setq
- uniquify-buffer-name-style 'post-forward
- uniquify-separator ":")
+(use-package uniquify
+  :init (setq uniquify-buffer-name-style 'post-forward
+              uniquify-separator ":"))
 
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;
 ;; browser ;;
 ;;;;;;;;;;;;;
-(setq browse-url-browser-function 'browse-url-generic)
-(setq browse-url-generic-program "/usr/bin/chromium")
+(use-package browse-url
+  :init (setq browse-url-browser-function 'browse-url-generic
+              browse-url-generic-program "/usr/bin/chromium"))
 
 ;; _____________________________________________________________________________
 
@@ -56,27 +55,23 @@
 
 (global-set-key (kbd "C-j") 'newline-and-indent)
 
-;; faster moving between buffers
-(windmove-default-keybindings 'meta)
-
 (setq require-final-newline t)
 
-
+;; faster moving between buffers
+(use-package windmove
+  :config (windmove-default-keybindings 'meta))
 
 ;;;;;;;;;;;;;;;;;;;
 ;; golden ratio  ;;
 ;;;;;;;;;;;;;;;;;;;
-(require 'golden-ratio)
-(golden-ratio-mode 1)
-
+(use-package golden-ratio
+  :config (golden-ratio-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; whitespace butler  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'ws-butler)
-(ws-butler-global-mode t)
-
-
+(use-package ws-butler
+  :config (ws-butler-global-mode t))
 
 ;; _____________________________________________________________________________
 
@@ -84,31 +79,27 @@
 ;; helm  ;;
 ;;;;;;;;;;;
 
-(require 'helm)
-
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-
-(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t)
-
-(helm-mode 1)
-
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-c h o") 'helm-occur)
+(use-package helm
+  :init (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
+              helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
+              helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+              helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+              helm-ff-file-name-history-use-recentf t)
+  :config (helm-mode 1)
+  :bind (("M-x" . helm-M-x)
+         ("M-y" . helm-show-kill-ring)
+         ("C-x b" . helm-mini)
+         ("C-x C-f" . helm-find-files)
+         ("C-c h o" . helm-occur)
+         :map helm-map
+	 ("<tab>" . helm-execute-persistent-action)
+	 ("C-i" . helm-execute-persistent-action)
+	 ("C-z" . helm-select-action)))
 
 (eval-after-load 'company
   '(progn
      (define-key company-mode-map (kbd "C-:") 'helm-company)
      (define-key company-active-map (kbd "C-:") 'helm-company)))
-
 
 ;; _____________________________________________________________________________
 
@@ -117,10 +108,8 @@
 ;;;;;;;;;;;;;;;;;;
 
 (use-package smartparens-config
-             :ensure smartparens
-             :config
-             (progn
-               (show-smartparens-global-mode t)))
-
-(add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
-(add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)
+  :ensure smartparens
+  :config (progn
+            (show-smartparens-global-mode t)
+            (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
+            (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)))
