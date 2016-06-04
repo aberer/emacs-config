@@ -30,9 +30,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package highlight-current-line
-  :config (setq highlight-current-line-globally t))
-
-(highlight-current-line-on t)
-
+  :config
+  (setq highlight-current-line-globally t)
+  (highlight-current-line-on t))
 
 (setq enable-recursive-minibuffers t)
