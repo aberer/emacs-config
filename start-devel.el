@@ -254,7 +254,7 @@
   :config
   (global-company-mode 1)
   (push 'company-rtags company-backends)
-  (setq company-auto-complete t)
-  :bind
-  (:map c-mode-base-map
-        ("<C-tab>" .  company-complete)))
+  (setq company-auto-complete t) )
+
+;; todo
+(global-set-key [C-tab]  'company-complete)

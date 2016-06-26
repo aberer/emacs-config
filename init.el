@@ -8,7 +8,6 @@
 (load "~/.emacs.d/start-devel")
 (load "~/.emacs.d/start-org")
 (load "~/.emacs.d/start-mu4e")
-(load "~/.emacs.d/mode-line")
 (load "~/.emacs.d/start-experimental")
 
 (put 'narrow-to-region 'disabled nil)
