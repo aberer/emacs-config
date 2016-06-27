@@ -73,33 +73,48 @@
 (use-package ws-butler
   :config (ws-butler-global-mode t))
 
+
 ;; _____________________________________________________________________________
+;;;;;;;;;;
+;; ivy  ;;
+;;;;;;;;;;
 
-;;;;;;;;;;;
-;; helm  ;;
-;;;;;;;;;;;
+(use-package ivy
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq magit-completing-read-function 'ivy-completing-read))
 
-(use-package helm
-  :init (setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-              helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-              helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-              helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-              helm-ff-file-name-history-use-recentf t)
-  :config (helm-mode 1)
-  :bind (("M-x" . helm-M-x)
-         ("M-y" . helm-show-kill-ring)
-         ("C-x b" . helm-mini)
-         ("C-x C-f" . helm-find-files)
-         ("C-c h o" . helm-occur)
-         :map helm-map
-	 ("<tab>" . helm-execute-persistent-action)
-	 ("C-i" . helm-execute-persistent-action)
-	 ("C-z" . helm-select-action)))
+;; _____________________________________________________________________________
+;;;;;;;;;;;;;
+;; counsel ;;
+;;;;;;;;;;;;;
 
-(eval-after-load 'company
-  '(progn
-     (define-key company-mode-map (kbd "C-:") 'helm-company)
-     (define-key company-active-map (kbd "C-:") 'helm-company)))
+(use-package counsel
+  :bind
+  ("M-x" . counsel-M-x)
+  ("C-x C-f" . counsel-find-file))
+
+;; _____________________________________________________________________________
+;;;;;;;;;;;;
+;; swiper ;;
+;;;;;;;;;;;;
+
+(use-package swiper
+  :config
+  (setq ivy-display-style 'fancy)
+  :bind
+  ("C-s" . swiper))
+
+;; _____________________________________________________________________________
+;;;;;;;;;;;;;;;;
+;; projectile ;;
+;;;;;;;;;;;;;;;;
+
+                                        ;TODO: configure
+(use-package projectile
+  :config
+  (setq projectile-completion-system 'ivy))
 
 ;; _____________________________________________________________________________
 
