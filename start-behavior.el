@@ -113,3 +113,14 @@
             (show-smartparens-global-mode t)
             (add-hook 'prog-mode-hook 'turn-on-smartparens-strict-mode)
             (add-hook 'markdown-mode-hook 'turn-on-smartparens-strict-mode)))
+
+
+;; _____________________________________________________________________________
+
+;;;;;;;;;;;;;
+;; keyfreq ;;
+;;;;;;;;;;;;;
+(use-package keyfreq
+  :config
+  (keyfreq-mode 1)
+  (keyfreq-autosave-mode 1))
