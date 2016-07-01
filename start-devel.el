@@ -92,7 +92,6 @@
                 (lambda ()
                   (interactive)
                   (progn
-                    (update-tango-project)
                     (compile "~/lib/compile-local.sh"))))
 
 ;; _____________________________________________________________________________
