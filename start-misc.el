@@ -61,4 +61,4 @@
   ("C-<f7>" . flyspell-buffer)
 
   :config
-  (setq my-dict-list '("german-new8" "american")))
+  (setq my-dict-list '("german-new8" "english")))
