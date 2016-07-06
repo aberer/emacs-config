@@ -118,16 +118,7 @@
 
 ;; _____________________________________________________________________________
 
-;;;;;;;;;;;;;;;;;;
-;; smart parens ;;
-;;;;;;;;;;;;;;;;;;
-(use-package smartparens-config
-  :ensure smartparens
-  :config
-  (setq sp-base-key-bindings (quote sp))
-  (smartparens-global-mode 1)
-  (smartparens-global-strict-mode 1)
-  (show-smartparens-global-mode 1))
+(electric-pair-mode 1)
 
 
 ;; _____________________________________________________________________________
