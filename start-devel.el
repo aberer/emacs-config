@@ -103,20 +103,27 @@
 
 (setq-default indent-tabs-mode nil)
 
-;; dont indent after namespace
-(defconst my-cc-style
-  '("user" ;; c++-mode
-    (c-offsets-alist . (
-                        (innamespace . [0])
-                        (substatement-open . 0)
-                        ) ) )
-  )
-(c-add-style "linux" my-cc-style)
+;; ;; dont indent after namespace
+;; (defconst my-cc-style
+;;   '("user" ;; c++-mode
+;;     (c-offsets-alist . (
+;;                         (innamespace . [0])
+;;                         (substatement-open . 0)
+;;                         ) ) )
+;;   )
+;; (c-add-style "linux" my-cc-style)
 
-(setq
- c-default-style "linux"
- c-basic-offset 4
- )
+;; (setq
+;;  c-default-style "linux"
+;;  c-basic-offset 4
+;;  )
+(defun my-c++-mode-hook()
+  (setq c-basic-offset 4)
+  (c-set-offset 'innamespace '0))
+
+(setq c-default-style "linux")
+
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
 ;; _____________________________________________________________________________
 
@@ -257,3 +264,14 @@
 
 ;; todo
 (global-set-key [C-tab]  'company-complete)
+
+
+;; ____________________________________________________________________________
+;;;;;;;;;;;;;;;;;;;;;
+;; uncrustify-mode ;;
+;;;;;;;;;;;;;;;;;;;;;
+
+(use-package uncrustify-mode
+  :config
+  (add-hook 'c-mode-hook 'uncrustify-mode)
+  (add-hook 'c++-mode-hook 'uncrustify-mode))
