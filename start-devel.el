@@ -119,7 +119,8 @@
 ;;  )
 (defun my-c++-mode-hook()
   (setq c-basic-offset 4)
-  (c-set-offset 'innamespace '0))
+  (c-set-offset 'inline-open 0)
+  (c-set-offset 'innamespace 0))
 
 (setq c-default-style "linux")
 
