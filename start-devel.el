@@ -103,6 +103,11 @@
 
 (setq-default indent-tabs-mode nil)
 
+;; disallows tab in changelog mode
+(add-hook 'change-log-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+
+
 ;; ;; dont indent after namespace
 ;; (defconst my-cc-style
 ;;   '("user" ;; c++-mode
