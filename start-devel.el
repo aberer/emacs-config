@@ -281,3 +281,10 @@
   :config
   (add-hook 'c-mode-hook 'uncrustify-mode)
   (add-hook 'c++-mode-hook 'uncrustify-mode))
+
+
+;; _____________________________________________________________________________
+;;;;;;;;;;;;;;;
+;; elf-mode  ;;
+;;;;;;;;;;;;;;;
+(add-to-list 'auto-mode-alist '("\\.\\(?:a\\|so\\)\\'" . elf-mode))

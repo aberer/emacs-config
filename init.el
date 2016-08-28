@@ -10,6 +10,8 @@
 (load "~/.emacs.d/start-mu4e")
 (load "~/.emacs.d/start-experimental")
 
+(load "~/.emacs.d/elf-mode")
+
 (put 'narrow-to-region 'disabled nil)
 
 (load custom-file)
