@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: invalid_argument
+# key: ia
+# --
+std::invalid_argument

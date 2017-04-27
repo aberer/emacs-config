@@ -1,0 +1,4 @@
+# key: tre
+# name: throw_runtime_error
+# --
+throw std::runtime_error("${1:reason}")

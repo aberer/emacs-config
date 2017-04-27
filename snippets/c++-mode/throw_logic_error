@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: throw_logic_error
+# key: tle
+# --
+throw std::logic_error("${1:reason}");
