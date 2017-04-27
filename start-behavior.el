@@ -61,12 +61,6 @@
 (use-package windmove
   :config (windmove-default-keybindings 'meta))
 
-;;;;;;;;;;;;;;;;;;;
-;; golden ratio  ;;
-;;;;;;;;;;;;;;;;;;;
-(use-package golden-ratio
-  :config (golden-ratio-mode 1))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; whitespace butler  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -130,3 +124,5 @@
   :config
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
+
+
