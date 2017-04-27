@@ -35,3 +35,13 @@
   (highlight-current-line-on t))
 
 (setq enable-recursive-minibuffers t)
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; SMART LINE MODE ;;
+;;;;;;;;;;;;;;;;;;;;;
+
+(use-package smart-mode-line)
+
+(sml/setup)
+(setq sml/theme 'respectful)
