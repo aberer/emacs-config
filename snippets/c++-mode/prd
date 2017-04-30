@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pud
+# key: pud
+# --
+`(insert-new-comment-box)`PUBLIC DATA

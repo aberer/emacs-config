@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pri
+# key: pri
+# --
+`(insert-new-comment-box)`PRIVATE INTERFACE
