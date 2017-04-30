@@ -1,5 +1,7 @@
 (add-to-list 'auto-mode-alist '("\\.hpp\\'" . c++-mode))
 
+(setq maxcols 80)
+
 
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;;;;;;
@@ -10,7 +12,7 @@
   (interactive)
   (c-indent-line-or-region)
   (comment-dwim-2)
-  (princ (apply 'concat (make-list (- 80 (current-column))  "_")) (current-buffer))
+  (princ (apply 'concat (make-list (- maxcols (current-column))  "_")) (current-buffer))
   )
 
 (defun insert-white-until-half()
@@ -31,7 +33,7 @@
   (move-end-of-line nil)
   (setq end-col (current-column))
   (setq remain-white
-        (max 0 (- 80 4 end-col)))
+        (max 0 (- maxcols 4 end-col)))
 
   (progn
     (setq remain-white-start  (+ (/ remain-white 2)
@@ -51,12 +53,12 @@
   (move-beginning-of-line nil)
   (open-line 1)
   (c-indent-line-or-region)
-  (princ (apply 'concat (make-list (- 80 (current-column))  "/")) (current-buffer))
+  (princ (apply 'concat (make-list (- maxcols (current-column))  "/")) (current-buffer))
 
   (next-line nil)
   (newline 1)
   (c-indent-line-or-region)
-  (princ (apply 'concat (make-list (- 80 (current-column))  "/")) (current-buffer))
+  (princ (apply 'concat (make-list (- maxcols (current-column))  "/")) (current-buffer))
 
   ;; reset cursor
   (previous-line nil)
@@ -122,8 +124,14 @@
 ;;  c-default-style "linux"
 ;;  c-basic-offset 4
 ;;  )
+
+(add-to-list 'auto-mode-alist '("\\.tpp\\'" . c++-mode))
+
+
 (defun my-c++-mode-hook()
   (setq c-basic-offset 4)
+  (c-set-offset 'extern-lang-open 0)
+
   (c-set-offset 'inline-open 0)
   (c-set-offset 'innamespace 0))
 
@@ -156,7 +164,7 @@
 (use-package whitespace
   :ensure
   :init
-  (setq whitespace-line-column 80) ;; limit line length
+  (setq whitespace-line-column maxcols) ;; limit line length
   (setq whitespace-style '(face lines-tail))
   :config
   (add-hook 'c++-mode-hook (lambda ()  (interactive) (whitespace-mode 1)))
@@ -193,7 +201,10 @@
 
 (setq
  ediff-split-window-function (quote split-window-horizontally)
- ediff-diff-options "-w" )
+ ediff-diff-options "-w"
+ )
+
+(csetq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; _____________________________________________________________________________
 ;;;;;;;;;;;
