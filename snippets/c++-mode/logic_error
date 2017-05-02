@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: logic_error
+# key: le
+# --
+bsl::logic_error

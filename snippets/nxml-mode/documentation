@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: documentation
+# key: doc
+# --
+<xs:annotation><xs:documentation></xs:documentation></xs:annotation>

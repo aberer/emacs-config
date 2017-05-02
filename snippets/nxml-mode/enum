@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: enum
+# key: enum
+# --
+<xs:enumeration bdem:id="${2:Id}" value="${1:Value}" />

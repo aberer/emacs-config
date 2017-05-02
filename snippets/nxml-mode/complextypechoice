@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: complextypechoice
+# key: ctc
+# --
+<!-- $1 -->
+<xs:complexType name="${1:Name}">
+<xs:choice>
+$2
+</xs:choice>
+</xs:complexType>

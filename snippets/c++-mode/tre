@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: throw_runtime_error
+# key: tre
+# --
+throw bsl::runtime_error("${1:Reason}");

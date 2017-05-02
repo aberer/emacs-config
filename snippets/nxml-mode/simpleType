@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: simpleType
+# key: st
+# --
+<!-- $1 -->
+<xs:simpleType name="${1:Name}" bdem:preserveEnumOrder="1">
+<xs:restriction base="${2:xs:string}" >
+$3
+</xs:restriction>
+</xs:simpleType>
