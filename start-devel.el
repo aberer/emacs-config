@@ -299,3 +299,26 @@
 ;; elf-mode  ;;
 ;;;;;;;;;;;;;;;
 (add-to-list 'auto-mode-alist '("\\.\\(?:a\\|so\\)\\'" . elf-mode))
+
+
+;; _____________________________________________________________________________
+;;;;;;;;;;
+;; jedi ;;
+;;;;;;;;;;
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+
+
+;; _____________________________________________________________________________
+;;;;;;;;;;;;;;;;
+;; git gutter ;;
+;;;;;;;;;;;;;;;;
+(use-package git-gutter-fringe+
+
+  :init
+  (setq git-gutter-fr+-side 'right-fringe)
+
+  :config
+  (global-git-gutter+-mode t)
+  (git-gutter-fr+-minimal)
+  )
