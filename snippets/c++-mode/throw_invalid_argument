@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: throw_invalid_argument
+# key: tia
+# --
+throw std::invalid_argument("${1:Reason}");

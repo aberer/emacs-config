@@ -2,4 +2,4 @@
 # name: logic_error
 # key: le
 # --
-bsl::logic_error
+std::logic_error

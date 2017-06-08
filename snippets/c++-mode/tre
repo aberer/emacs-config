@@ -2,4 +2,4 @@
 # name: throw_runtime_error
 # key: tre
 # --
-throw bsl::runtime_error("${1:Reason}");
+throw std::runtime_error("${1:Reason}");

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: stringstream
+# key: sst
+# --
+std::stringstream
