@@ -254,6 +254,7 @@
   :init
   (setq rtags-autostart-diagnostics t)
   (setq rtags-completions-enabled t)
+  (setq rtags-display-result-backend 'ivy)
 
   :config
   (rtags-enable-standard-keybindings)
@@ -288,10 +289,10 @@
 ;; uncrustify-mode ;;
 ;;;;;;;;;;;;;;;;;;;;;
 
-(use-package uncrustify-mode
-  :config
-  (add-hook 'c-mode-hook 'uncrustify-mode)
-  (add-hook 'c++-mode-hook 'uncrustify-mode))
+;; (use-package uncrustify-mode
+;;   :config
+;;   (add-hook 'c-mode-hook 'uncrustify-mode)
+;;   (add-hook 'c++-mode-hook 'uncrustify-mode))
 
 
 ;; _____________________________________________________________________________
@@ -313,12 +314,25 @@
 ;;;;;;;;;;;;;;;;
 ;; git gutter ;;
 ;;;;;;;;;;;;;;;;
-(use-package git-gutter-fringe+
 
-  :init
-  (setq git-gutter-fr+-side 'right-fringe)
+(use-package git-gutter)
+(global-git-gutter-mode +1)
 
-  :config
-  (global-git-gutter+-mode t)
-  (git-gutter-fr+-minimal)
-  )
+; If you enable global minor mode
+(global-git-gutter-mode t)
+
+(global-set-key (kbd "C-x C-g") 'git-gutter)
+(global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+
+;; Jump to next/previous hunk
+(global-set-key (kbd "C-x p") 'git-gutter:previous-hunk)
+(global-set-key (kbd "C-x n") 'git-gutter:next-hunk)
+
+;; Stage current hunk
+(global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
+
+;; Revert current hunk
+(global-set-key (kbd "C-x v r") 'git-gutter:revert-hunk)
+
+;; Mark current hunk
+(global-set-key (kbd "C-x v SPC") #'git-gutter:mark-hunk)
