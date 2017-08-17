@@ -214,6 +214,9 @@
   :init
   (setq magit-auto-revert-mode nil)
   (setq magit-last-seen-setup-instructions "1.4.0")
+  (setq magit-diff-arguments (quote ("--stat")))
+  (setq magit-fetch-arguments (quote ("--prune")))
+  (setq magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256")))
   :bind
   ("C-<f5>" . magit-status))
 
