@@ -28,3 +28,9 @@
 (global-set-key (kbd "<f5>")  '(lambda ()
                                  (interactive)
                                  (find-file "~/org/tasks.org") ))
+
+
+;;;;;;;;;;;;;;
+;; ORG JIRA ;;
+;;;;;;;;;;;;;;
+(setq jiralib-url "https://jira1.prod.bloomberg.com")
