@@ -1,7 +1,7 @@
 (use-package zenburn-theme)
 
 (setq  default-frame-alist '((font-backend . "xft")
-                             (font . "Monospace-12");; "Inconsolata-14"
+                             (font . "Monospace-11");; "Inconsolata-14"
                              (right-fringe . 0)
                              (left-fringe . 1)
                              (scroll-bar-mode . -1)

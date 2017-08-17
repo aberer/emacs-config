@@ -29,7 +29,6 @@
 (load "~/.emacs.d/start-behavior")
 (load "~/.emacs.d/start-devel")
 (load "~/.emacs.d/start-org")
-(load "~/.emacs.d/start-mu4e")
 (load "~/.emacs.d/start-experimental")
 
 (load "~/.emacs.d/elf-mode")

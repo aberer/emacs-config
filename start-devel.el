@@ -79,22 +79,17 @@
 (setq compilation-read-command nil
       compilation-auto-jump-to-first-error t)
 
-;TODO: move to user defined things
-(global-set-key (kbd "C-<f1>")
-                (lambda ()
-                  (interactive)
-                  (compile "cd /tmp/exabayes/ ; make -j4 ")))
-
-(global-set-key (kbd "C-<f2>")
-                (lambda ()
-                  (interactive)
-                  (compile "~/lib/compile-local.sh ae"))) ; uses clang
-
 (global-set-key (kbd "C-<f1>")
                 (lambda ()
                   (interactive)
                   (progn
-                    (compile "~/lib/compile-local.sh"))))
+                    (compile "bash ~/local/usr/local/bin/compile-local.sh"))))
+
+(global-set-key (kbd "C-<f2>")
+                (lambda ()
+                  (interactive)
+                  (progn
+                    (compile "bash ~/local/usr/local/bin/compile-local.sh -a"))))
 
 ;; _____________________________________________________________________________
 
@@ -276,6 +271,10 @@
 ;;;;;;;;;;;;;
 ;; company ;;
 ;;;;;;;;;;;;;
+
+;; (defun caadr (list)
+;;   (car (car (cdr list))))
+
 (use-package company
   :ensure
   :config
