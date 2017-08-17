@@ -17,18 +17,14 @@
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (setq org-log-done t)
 
-(setq org-agenda-files (quote ("~/gtd")))
+(setq org-agenda-files (quote ("~/org/tasks.org")))
 
 
 (setq org-capture-templates
-      '( ("t"
-          "Todo"
-          entry
-          (file+headline "~/gtd/tasks.org" "INBOX")
-          "* TODO %?\n %a \n %T")
-         ("a" "Appointment" entry (file+datetree+prompt "~/gtd/tasks.org" "Calendar") "* APPT  %?\n %a \n SCHEDULED: %T")
+      '( ("t"    "Todo"            entry    (file+headline "~/org/tasks.org" "INBOX")              "* TODO %?\n %a \n %U")
+         ("a"     "Appointment"    entry    (file+datetree+prompt "~/org/tasks.org" "Calendar")    "* APPT  %?\n %a \n SCHEDULED: %T")
          ))
 
 (global-set-key (kbd "<f5>")  '(lambda ()
                                  (interactive)
-                                 (find-file "~/gtd/tasks.org") ))
+                                 (find-file "~/org/tasks.org") ))
