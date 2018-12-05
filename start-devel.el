@@ -160,7 +160,7 @@
   :ensure
   :init
   (setq whitespace-line-column maxcols) ;; limit line length
-  (setq whitespace-style '(face lines-tail))
+  (setq whitespace-style '(face trailing tabs lines-tail))
   :config
   (add-hook 'c++-mode-hook (lambda ()  (interactive) (whitespace-mode 1)))
   (add-hook 'c-mode-hook (lambda () (interactive) (whitespace-mode 1)))
@@ -208,12 +208,16 @@
 (use-package magit
   :init
   (setq magit-auto-revert-mode nil)
-  (setq magit-last-seen-setup-instructions "1.4.0")
-  (setq magit-diff-arguments (quote ("--stat")))
-  (setq magit-fetch-arguments (quote ("--prune")))
-  (setq magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256")))
+  ;; (setq magit-last-seen-setup-instructions "1.4.0")
+  (setq magit-diff-arguments '("--stat"))
+  (setq magit-fetch-arguments '("--prune"))
+  (setq magit-log-arguments '("--graph" "--color" "--decorate" "-n256"))
+  (setq magit-cherry-pick-arguments '("-x"))
+  (setq magit-diff-arguments '("--stat") t)
+  (setq magit-log-arguments '("--graph" "--color" "--decorate" "-n256") t)
   :bind
-  ("C-<f5>" . magit-status))
+  ("C-<f5>" . magit-status)
+  ("C-<f4>" . magit-blame))
 
 ;; _____________________________________________________________________________
 
@@ -227,10 +231,10 @@
 
 (setq speedbar-update-flag t)
 
-(use-package puml-mode
+(use-package plantuml-mode
   :init
-  (add-to-list 'auto-mode-alist '("\\.puml\\'" . puml-mode))
-  (setq puml-plantuml-jar-path "~/lib/plantuml.jar") )
+  (add-to-list 'auto-mode-alist '("\\.puml\\'" . plantuml-mode))
+  (setq plantuml-plantuml-jar-path "~/local/usr/local/bin/plantuml.jar") )
 
 ;; _____________________________________________________________________________
 
@@ -284,6 +288,8 @@
 
 ;; todo
 (global-set-key [C-tab]  'company-complete)
+
+(setq company-auto-complete 'company-explicit-action-p)
 
 
 ;; ____________________________________________________________________________
